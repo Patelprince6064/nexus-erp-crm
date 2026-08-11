@@ -29,7 +29,6 @@ services:
     staticPublishPath: client/dist
     envVars:
       - key: VITE_API_URL
-        sync: false
         value: https://nexus-erp-server.onrender.com/api
     routes:
       - type: rewrite
