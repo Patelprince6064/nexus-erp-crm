@@ -3,6 +3,7 @@ services:
   - type: web
     name: nexus-erp-server
     env: node
+    plan: free
     buildCommand: cd server && npm install && npx prisma generate && npm run build
     startCommand: cd server && npx prisma migrate deploy && npm run seed && node dist/server.js
     envVars:
@@ -40,3 +41,4 @@ databases:
   - name: nexus-erp-db
     databaseName: nexus_erp_crm
     user: nexus_admin
+    plan: free
