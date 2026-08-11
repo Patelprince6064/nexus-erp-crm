@@ -18,6 +18,8 @@ services:
         generateValue: true
       - key: JWT_EXPIRES_IN
         value: 7d
+      - key: CLIENT_URL
+        value: '*'
 
   # React Frontend Static Site
   - type: web
@@ -27,11 +29,8 @@ services:
     staticPublishPath: client/dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexus-erp-server
-          property: url
-          suffix: /api
+        sync: false
+        value: https://nexus-erp-server.onrender.com/api
     routes:
       - type: rewrite
         source: /*
