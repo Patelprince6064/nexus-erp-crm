@@ -3,9 +3,10 @@ services:
   - type: web
     name: nexus-erp-server
     env: node
+    rootDir: server
     plan: free
-    buildCommand: cd server && npm install && npx prisma generate && npm run build
-    startCommand: cd server && npx prisma migrate deploy && npm run seed && node dist/server.js
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npx prisma db push && npx prisma db seed && node dist/server.js
     envVars:
       - key: PORT
         value: 10000
@@ -26,8 +27,9 @@ services:
   - type: web
     name: nexus-erp-client
     env: static
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: client/dist
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://nexus-erp-server.onrender.com/api
