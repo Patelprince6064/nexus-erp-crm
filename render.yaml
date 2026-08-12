@@ -3,7 +3,7 @@ services:
   - type: web
     name: nexus-erp-server
     env: node
-    plan: free
+    plan: starter
     rootDir: server
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npx prisma db push --accept-data-loss && npx prisma db seed && node dist/server.js
@@ -27,7 +27,6 @@ services:
   - type: web
     name: nexus-erp-client
     env: static
-    plan: free
     rootDir: client
     buildCommand: npm install && VITE_API_URL=https://nexus-erp-server.onrender.com/api npm run build
     staticPublishPath: dist
