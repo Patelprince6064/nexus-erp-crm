@@ -16,4 +16,4 @@ RUN npm install --omit=dev
 RUN npx prisma generate
 COPY --from=builder /app/dist ./dist
 EXPOSE 5000
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npx prisma db seed && node dist/server.js"]
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss && (npx prisma db seed || echo 'Seed skipped') && node dist/server.js"]
